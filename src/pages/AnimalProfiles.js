@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchAnimals } from '../store/actions/animalActions';
 import TextInput from './TextInput';
 
 function AnimalProfiles() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data: animals, loading, error } = useSelector(state => state.animals);
-
   const [searchText, setSearchText] = useState("");
+  
+  const handleViewDetails = (animalId) => {
+    navigate(`/animal-profiles/${animalId}`);
+  };
 
   useEffect(() => {
     dispatch(fetchAnimals());
@@ -31,7 +36,10 @@ function AnimalProfiles() {
       <TextInput onInputChange={handleSearchInputChange} />
       <ul>
         {filteredAnimals.map(animal => (
-          <li key={animal.id}>{animal.name} - {animal.species}</li>
+          <li key={animal.id}>
+            <strong>{animal.name}</strong> - {animal.species}
+            <button onClick={() => handleViewDetails(animal.id)}>View Details</button>
+          </li>
         ))}
       </ul>
     </div>
