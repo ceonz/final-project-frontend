@@ -7,16 +7,6 @@ function Home() {
   return (
     <div>
       <h1> Animal Shelter Management System </h1>
-        <div>
-            <Link to="/animal-profiles">
-            <button>Animal Profiles</button>
-            </Link>
-        </div>
-        <div>
-            <Link to="/shelter-tasks">
-            <button>Shelter Tasks</button>
-            </Link>
-        </div>
     </div>
   );
 }
