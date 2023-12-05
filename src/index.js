@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import Home from './pages/Home';
+import AnimalProfiles from './pages/AnimalProfiles';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Router>
+      <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/AnimalProfiles' element={<AnimalProfiles />} />
+      </Routes>
+    </Router>
     <App />
   </React.StrictMode>
 );
