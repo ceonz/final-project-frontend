@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import Home from './pages/Home';
 import AnimalProfiles from './pages/AnimalProfiles';
+import ShelterTasks from './pages/ShelterTasks';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +16,7 @@ root.render(
           <Route path='/' element={<Home />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/AnimalProfiles' element={<AnimalProfiles />} />
+          <Route path='/ShelterTasks' element={<ShelterTasks />} />
       </Routes>
     </Router>
     <App />

@@ -4,10 +4,10 @@ import '../App.css';
 import './Home';
 
 
-function AnimalProfiles() {
+function ShelterTasks() {
     return (
         <div>
-            <h1> Animal Profiles </h1>
+            <h1> Shelter Tasks </h1>
             <div >
                 <Link to="/Home">
                     <button>
@@ -19,4 +19,4 @@ function AnimalProfiles() {
     );
 }
 
-export default AnimalProfiles;
+export default ShelterTasks;

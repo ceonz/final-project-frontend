@@ -8,16 +8,18 @@ function Home() {
         <div>
             <h1> Animal Shelter Management System </h1>
             <div >
-                <a href="/AnimalProfiles">
+                <Link to="/AnimalProfiles">
                     <button>
                         Animal Profiles
                     </button>
-                </a>
+                </Link>
             </div>
             <div>
-                <button>
-                    Shelter Tasks
-                </button>
+                <Link to="/ShelterTasks">
+                    <button>
+                        Shelter Tasks
+                    </button>
+                </Link>
             </div>
         </div>
     );
