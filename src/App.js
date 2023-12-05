@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AnimalProfiles from './pages/AnimalProfiles';
+import AnimalDetails from './pages/AnimalDetails';
 import ShelterTasks from './pages/ShelterTasks';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/animal-profiles" element={<AnimalProfiles />} />
+        <Route path="/animal-profiles/:animalId" element={<AnimalDetails />} />
         <Route path="/shelter-tasks" element={<ShelterTasks />} />
       </Routes>
     </Router>
