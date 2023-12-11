@@ -1,1 +1,14 @@
 @import-normalize;
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.horizontal-scrollable-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
