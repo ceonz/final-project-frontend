@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #ccc;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.divider {
+  width: 1px;
+  background-color: #ccc;
+}
+
+.card img {
+  width: 260px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.card section {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}

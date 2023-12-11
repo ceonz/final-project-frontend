@@ -1,8 +1,8 @@
-import "./AnimalProfileCard.css";
+import styles from "./AnimalProfileCard.module.css";
 
 export default function AnimalProfileCard({ animal, requires }) {
   return (
-    <div className="card">
+    <div className={styles.card}>
       <figure>
         <img
           src={animal.imageUrl}

@@ -5,6 +5,13 @@ a {
   color: inherit;
 }
 
+.vertical-scrollable-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .horizontal-scrollable-container {
   display: flex;
   flex-direction: row;
