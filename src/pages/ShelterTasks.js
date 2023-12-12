@@ -5,24 +5,24 @@ import "./Home";
 import { Link } from "react-router-dom";
 import { fetchTasks } from "../store/actions/shelterActions";
 import TaskDescriptionCard from "../components/TaskDescriptionCard";
+// import TextInput from "./TextInput";
 
 function ShelterTasks() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    data: tasks,
-    loading,
-    error,
-  } = useSelector((state) => state.tasks);
+  // const {
+  //   data: tasks,
+  //   loading,
+  //   error,
+  // } = useSelector((state) => state.tasks);
 
-  const handleViewDetails = (taskId) => {
-    navigate(`/shelter-tasks/${taskId}`);
-  };
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error}</div>;
 
   const tasks = [...Array(10).keys()]
 
-    .map((n) => {
-      const priority = ["Low", "Medium", "High"][Math.floor(Math.random() * 3)];
+  .map((n) => {
+   const priority = ["Low", "Medium", "High"][Math.floor(Math.random() * 3)];
 
       return {
         id: n + 1,
@@ -55,12 +55,19 @@ function ShelterTasks() {
       return 1;
     });
 
+    const [searchText, setSearchText] = useState("");
+
+    const handleViewDetails = (taskId) => {
+      navigate(`/shelter-tasks/${taskId}`);
+    };
+
+    const handleSearchInputChange = (text) => {
+      setSearchText(text);
+    };
+
     useEffect(() => {
       dispatch(fetchTasks());
     }, [dispatch]);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
 
   return (
     <main>
@@ -69,7 +76,7 @@ function ShelterTasks() {
       </header>
       <div className="vertical-scrollable-container">
         {tasks.map((task) => (
-          <Link to={`/animal-profiles/${task.id}`}>
+          <Link to={`/shelter-tasks/${task.id}`}>
             <TaskDescriptionCard key={task.id} task={task} />
           </Link>
         ))}
