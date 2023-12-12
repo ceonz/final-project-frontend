@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTaskById } from "../store/actions/shelterActions";
-import TaskForm from "../components/TaskForm";
-import { fetchAnimalById } from "../store/actions/animalActions";
-import AnimalForm from "../components/AnimalForm";
 
 function TaskDetails() {
   const { taskId } = useParams();
@@ -53,29 +50,6 @@ function TaskDetails() {
             <p>
                 <strong>Animal:</strong> {task.animal}
             </p>
-            {/* <div>
-                <p>
-                    <strong>Species:</strong> {AnimalForm.species}
-                </p>
-                <p>
-                    <strong>Breed:</strong> {AnimalForm.breed}
-                </p>
-                <p>
-                    <strong>Age:</strong> {AnimalForm.age}
-                </p>
-                <p>
-                    <strong>Health Status:</strong> {AnimalForm.healthStatus}
-                </p>
-                <p>
-                    <strong>Adoption Status:</strong> {AnimalForm.adoptionStatus}
-                </p>
-                <p>
-                    <strong>Arrival Date:</strong> {AnimalForm.arrivalDate}
-                </p>
-                <p>
-                    <strong>Description:</strong> {AnimalForm.description}
-                </p>
-            </div> */}
           </div>
         </>
       )}
