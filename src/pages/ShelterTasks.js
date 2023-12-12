@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./Home";
 import { Link } from "react-router-dom";
+import { fetchTasks } from "../store/actions/shelterActions";
 import TaskDescriptionCard from "../components/TaskDescriptionCard";
 
 function ShelterTasks() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    data: tasks,
+    loading,
+    error,
+  } = useSelector((state) => state.tasks);
+
+  const handleViewDetails = (taskId) => {
+    navigate(`/shelter-tasks/${taskId}`);
+  };
+
   const tasks = [...Array(10).keys()]
+
     .map((n) => {
       const priority = ["Low", "Medium", "High"][Math.floor(Math.random() * 3)];
 
@@ -31,12 +47,20 @@ function ShelterTasks() {
         },
       };
     })
+
     .sort((a, b) => {
       if (a.priority === b.priority) return 0;
       if (a.priority === "High") return -1;
       if (a.priority === "Medium" && b.priority === "Low") return -1;
       return 1;
     });
+
+    useEffect(() => {
+      dispatch(fetchTasks());
+    }, [dispatch]);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
   return (
     <main>
