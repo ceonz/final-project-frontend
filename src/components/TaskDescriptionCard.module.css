@@ -9,6 +9,7 @@
   box-shadow: 0 0 10px #ccc;
   gap: 10px;
   font-size: 1.2rem;
+  overflow: hidden;
 }
 
 .divider {
@@ -17,13 +18,14 @@
 }
 
 .card img {
-  width: 260px;
+  width: 200px;
   object-fit: cover;
   border-radius: 5px;
 }
 
 .card section {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 0.05fr 1fr;
   width: 100%;
   justify-content: space-around;
 }

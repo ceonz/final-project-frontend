@@ -1,29 +1,28 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAnimalById } from "../store/actions/animalActions";
+import { fetchTaskById } from "../store/actions/shelterActions";
 
-function AnimalDetails() {
-  const { animalId } = useParams();
+function ShelterTaskDetails() {
+  const { taskId } = useParams();
   const dispatch = useDispatch();
-  const animal = useSelector((state) => state.animals.currentAnimal);
-  const loading = useSelector((state) => state.animals.loading);
-  const error = useSelector((state) => state.animals.error);
+  const task = useSelector((state) => state.tasks.currentTask);
+  const animal = useSelector((state) => state.tasks.currentTask?.animal);
+  const loading = useSelector((state) => state.tasks.loading);
+  const error = useSelector((state) => state.tasks.error);
 
   useEffect(() => {
-    dispatch(fetchAnimalById(animalId));
-  }, [dispatch, animalId]);
+    dispatch(fetchTaskById(taskId));
+  }, [dispatch, taskId]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      <h1>Animal Details</h1>
-      {animal && (
+      <h1>Task Details</h1>
+      {task && (
         <>
-          {/* TODO, refactor animalform */}
-          {/* <AnimalForm animal={animal} onSave={handleSave} />  */}
           <div>
             <h2>{animal.name}</h2>
             <img
@@ -68,10 +67,29 @@ function AnimalDetails() {
               <strong>Description:</strong> {animal.description}
             </p>
           </div>
+          <hr />
+          <div>
+            <h2>{task.name}</h2>
+            <p>
+              <strong>Assigned To:</strong> {task.assignedTo}
+            </p>
+            <p>
+              <strong>Description:</strong> {task.description}
+            </p>
+            <p>
+              <strong>Due Date:</strong> {task.dueDate}
+            </p>
+            <p>
+              <strong>Status:</strong> {task.status}
+            </p>
+            <p>
+              <strong>Priority:</strong> {task.priority}
+            </p>
+          </div>
         </>
       )}
     </div>
   );
 }
 
-export default AnimalDetails;
+export default ShelterTaskDetails;
