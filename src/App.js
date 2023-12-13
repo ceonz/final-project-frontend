@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import AnimalProfiles from './pages/AnimalProfiles';
 import AnimalDetails from './pages/AnimalDetails';
 import ShelterTasks from './pages/ShelterTasks';
+import TaskDetails from './pages/TaskDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/animal-profiles" element={<AnimalProfiles />} />
         <Route path="/animal-profiles/:animalId" element={<AnimalDetails />} />
+        <Route path="/shelter-tasks/:taskId" element={<TaskDetails />} />
         <Route path="/shelter-tasks" element={<ShelterTasks />} />
       </Routes>
     </Router>
