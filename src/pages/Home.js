@@ -1,36 +1,39 @@
-import React from "react";
-import "./AnimalProfiles";
-import "./ShelterTasks";
+import React, { useEffect, useMemo } from "react";
 import AnimalProfileCard from "../components/AnimalProfileCard";
 import { Link } from "react-router-dom";
+import { fetchAnimals } from "../store/actions/animalActions";
+import { useDispatch, useSelector } from "react-redux";
 
 function Home() {
-  const animals = [...Array(10).keys()].map((n) => {
-    let description = "";
-    if (Math.random() > 0.5) description += "This animal is very friendly. ";
-    if (Math.random() > 0.5) description += "This animal is very energetic. ";
-    if (Math.random() > 0.5) description += "This animal is very playful. ";
-    if (Math.random() > 0.5) description += "This animal is very shy. ";
-    if (Math.random() > 0.5) description += "This animal is very quiet. ";
-    if (Math.random() > 0.5) description += "This animal is very loud. ";
-    if (Math.random() > 0.5) description += "This animal is very lazy. ";
-    if (Math.random() > 0.5) description += "This animal is very smart. ";
+  const dispatch = useDispatch();
+  const {
+    data: animals,
+    loading,
+    error,
+  } = useSelector((state) => state.animals);
 
-    return {
-      id: n + 1,
-      name: "Fido",
-      imageUrl: "https://cdn2.thecatapi.com/images/ZUumV9qmY.jpg", // from https://api.thecatapi.com/v1/images/search
-      species: "Dog",
-      breed: "Labrador Retriever",
-      age: 5,
-      healthStatus: "Healthy",
-      isNeutered: Math.random() > 0.5,
-      isVaccinated: Math.random() > 0.5,
-      adoptionStatus: "Available",
-      arrivalDate: "2021-01-01",
-      description,
-    };
-  });
+  useEffect(() => {
+    dispatch(fetchAnimals());
+  }, [dispatch]);
+
+  const sortedAnimals = useMemo(
+    () =>
+      animals
+        .toSorted((a, b) => b.arrivalDate.localeCompare(a.arrivalDate))
+        .slice(0, 10),
+    [animals]
+  );
+
+  const filteredAnimals = useMemo(
+    () =>
+      animals
+        .filter((animal) => !animal.isNeutered || !animal.isVaccinated)
+        .slice(0, 10),
+    [animals]
+  );
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <main>
@@ -39,28 +42,31 @@ function Home() {
       </header>
       <h2>Recently Arrived Animals</h2>
       <div className="horizontal-scrollable-container">
-        {animals.map((animal) => (
-          <Link to={`/animal-profiles/${animal.id}`}>
-            <AnimalProfileCard key={animal.id} animal={animal} />
+        {sortedAnimals.map((animal) => (
+          <Link
+            key={`recent-${animal.id}`}
+            to={`/animal-profiles/${animal.id}`}
+          >
+            <AnimalProfileCard
+              animal={animal}
+              display={{ arrivalDate: true }}
+            />
           </Link>
         ))}
       </div>
       <h2>Animals Need Care</h2>
       <div className="horizontal-scrollable-container">
-        {animals
-          .filter((animal) => !animal.isNeutered || !animal.isVaccinated)
-          .map((animal) => (
-            <Link to={`/animal-profiles/${animal.id}`}>
-              <AnimalProfileCard
-                key={animal.id}
-                animal={animal}
-                requires={[
-                  !animal.isNeutered && "Neutering",
-                  !animal.isVaccinated && "Vaccination",
-                ].filter((x) => x)}
-              />
-            </Link>
-          ))}
+        {filteredAnimals.map((animal) => (
+          <Link key={`care-${animal.id}`} to={`/animal-profiles/${animal.id}`}>
+            <AnimalProfileCard
+              animal={animal}
+              requires={[
+                !animal.isNeutered && "Neutering",
+                !animal.isVaccinated && "Vaccination",
+              ].filter((x) => x)}
+            />
+          </Link>
+        ))}
       </div>
     </main>
   );

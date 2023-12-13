@@ -19,3 +19,13 @@ a {
   overflow-y: hidden;
   white-space: nowrap;
 }
+
+.masonry-container {
+  column-count: 3;
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+}

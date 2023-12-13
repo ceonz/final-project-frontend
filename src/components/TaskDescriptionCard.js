@@ -7,7 +7,7 @@ export default function TaskDescriptionCard({ task }) {
   return (
     <div className={styles.card}>
       <img
-        src={animal.imageUrl}
+        src={animal.image}
         alt={`A ${animal.species} named ${animal.name}`}
       />
       <section>
