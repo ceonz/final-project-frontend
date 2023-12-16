@@ -47,7 +47,7 @@ export const addTask = async (formData) => {
 
 export const updateTask = async (taskId, formData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/task/${taskId}`, {
+    const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +60,21 @@ export const updateTask = async (taskId, formData) => {
     return await response.json();
   } catch (error) {
     console.error("Error in updateTask:", error);
+    throw error;
+  }
+};
+
+export const deleteTask = async (taskId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Error deleting task");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error in deleteTask:", error);
     throw error;
   }
 };

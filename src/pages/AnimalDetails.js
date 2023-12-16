@@ -1,7 +1,31 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAnimalById } from "../store/actions/animalActions";
+
+const styles = {
+  section: {
+    display: "flex",
+    gap: "1rem",
+  },
+  imageBox: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem",
+  },
+  links: {
+    display: "flex",
+    gap: "0.5rem",
+  },
+  link: {
+    textDecoration: "underline",
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.8rem",
+  },
+};
 
 function AnimalDetails() {
   const { animalId } = useParams();
@@ -16,61 +40,65 @@ function AnimalDetails() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if (!animal) return <div>Animal not found</div>;
 
   return (
-    <div>
-      <h1>Animal Details</h1>
-      {animal && (
-        <>
-          {/* TODO, refactor animalform */}
-          {/* <AnimalForm animal={animal} onSave={handleSave} />  */}
-          <div>
-            <h2>{animal.name}</h2>
-            <img
-              src={animal.image}
-              alt={animal.name}
-              width={350}
-              style={{
-                float: "left",
-                marginRight: "1rem",
-                marginBottom: "1rem",
-              }}
-            />
-            <p>
-              <strong>Species:</strong> {animal.species}
-            </p>
-            <p>
-              <strong>Breed:</strong> {animal.breed}
-            </p>
-            <p>
-              <strong>Age:</strong> {animal.age}
-            </p>
-            <p>
-              <strong>Health Status:</strong> {animal.healthStatus}
-            </p>
-            <p>
-              <strong>Adoption Status:</strong> {animal.adoptionStatus}
-            </p>
-            <p>
-              <strong>Neutered:</strong> {animal.isNeutered ? "Yes" : "No"}
-            </p>
-            <p>
-              <strong>Vaccinated:</strong> {animal.isVaccinated ? "Yes" : "No"}
-            </p>
-            <p>
-              <strong>Arrival Date:</strong>{" "}
-              {new Date(animal.arrivalDate).toLocaleString("en-US", {
-                dateStyle: "long",
-                timeStyle: "short",
-              })}
-            </p>
-            <p>
-              <strong>Description:</strong> {animal.description}
-            </p>
+    <main>
+      <header>
+        <h1>Animal Details</h1>
+        <h3>{animal.name}</h3>
+      </header>
+      <section style={styles.section}>
+        <div style={styles.imageBox}>
+          <div style={styles.links}>
+            <Link style={styles.link} to={`/animal-profiles/${animalId}/edit`}>
+              Edit Profile
+            </Link>
+            <span>&sdot;</span>
+            <Link
+              style={styles.link}
+              to={`/animal-profiles/${animalId}/add-shelter-task`}
+            >
+              Add Shelter Task
+            </Link>
           </div>
-        </>
-      )}
-    </div>
+          <img src={animal.image} alt={animal.name} width={350} />
+        </div>
+        <div style={styles.content}>
+          <span>
+            <strong>Species:</strong> {animal.species}
+          </span>
+          <span>
+            <strong>Breed:</strong> {animal.breed}
+          </span>
+          <span>
+            <strong>Age:</strong> {animal.age}
+          </span>
+          <span>
+            <strong>Health Status:</strong> {animal.healthStatus}
+          </span>
+          <span>
+            <strong>Adoption Status:</strong> {animal.adoptionStatus}
+          </span>
+          <span>
+            <strong>Neutered:</strong> {animal.isNeutered ? "Yes" : "No"}
+          </span>
+          <span>
+            <strong>Vaccinated:</strong> {animal.isVaccinated ? "Yes" : "No"}
+          </span>
+          <span>
+            <strong>Arrival Date:</strong>{" "}
+            {new Date(animal.arrivalDate).toLocaleString("en-US", {
+              dateStyle: "long",
+              timeStyle: "short",
+            })}
+          </span>
+          <span>
+            <strong>Description:</strong> {animal.description}
+          </span>
+        </div>
+      </section>
+    </main>
   );
 }
 

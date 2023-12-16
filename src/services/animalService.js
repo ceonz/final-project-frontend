@@ -63,3 +63,18 @@ export const updateAnimal = async (animalId, formData) => {
     throw error;
   }
 }
+
+export const deleteAnimal = async (animalId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/animals/${animalId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Error deleting animal');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error in deleteAnimal:', error);
+    throw error;
+  }
+}
