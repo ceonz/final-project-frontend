@@ -7,6 +7,7 @@ import AnimalDetails from "./pages/AnimalDetails";
 import ShelterTasks from "./pages/ShelterTasks";
 import ShelterTaskDetails from "./pages/ShelterTaskDetails";
 import EditAnimalProfile from "./pages/EditAnimalProfile";
+import EditShelterTask from "./pages/EditShelterTask";
 
 function App() {
   return (
@@ -21,8 +22,16 @@ function App() {
           path="/animal-profiles/:animalId/edit"
           element={<EditAnimalProfile />}
         />
-        <Route path="/shelter-tasks/:taskId" element={<ShelterTaskDetails />} />
+        <Route
+          path="/animal-profiles/:animalId/add-shelter-task"
+          element={<EditShelterTask />}
+        />
         <Route path="/shelter-tasks" element={<ShelterTasks />} />
+        <Route path="/shelter-tasks/:taskId" element={<ShelterTaskDetails />} />
+        <Route
+          path="/shelter-tasks/:taskId/edit"
+          element={<EditShelterTask />}
+        />
         <Route path="/register-animal" element={<EditAnimalProfile />} />
       </Routes>
     </Router>

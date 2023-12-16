@@ -17,13 +17,25 @@ export default function TaskDescriptionCard({ task }) {
           <p>Breed: {animal.breed}</p>
           <p>Age: {animal.age}</p>
           <p>Health Status: {animal.healthStatus}</p>
-          <p>Arrival Date: {animal.arrivalDate}</p>
+          <p>
+            Arrival Date:{" "}
+            {new Date(animal.arrivalDate).toLocaleString("en-US", {
+              dateStyle: "long",
+              timeStyle: "short",
+            })}
+          </p>
         </div>
         <i className={styles.divider} />
         <div>
           <p>Assigned To: {task.assignedTo}</p>
           <p>Description: {task.description}</p>
-          <p>Due Date: {task.dueDate}</p>
+          <p>
+            Due Date:{" "}
+            {new Date(task.dueDate).toLocaleString("en-US", {
+              dateStyle: "long",
+              timeStyle: "short",
+            })}
+          </p>
           <p>Status: {task.status}</p>
           <p>Priority: {task.priority}</p>
         </div>

@@ -20,9 +20,10 @@ export default function EditAnimalProfile() {
   useEffect(() => {
     if (animalId) {
       dispatch(fetchAnimalById(animalId));
-    } else {
-      dispatch({ type: "CLEAR_CURRENT_ANIMAL" });
     }
+    return () => {
+      dispatch({ type: "CLEAR_CURRENT_ANIMAL" });
+    };
   }, [dispatch, animalId]);
 
   if (!animal && loading) return <div>Loading...</div>;
@@ -41,9 +42,11 @@ export default function EditAnimalProfile() {
       await new Promise((resolve) => setTimeout(resolve, 300));
     } while (loading);
 
-    navigate("/animal-profiles", {
-      replace: true,
-    });
+    if (animal && !formData) {
+      navigate(`/animal-profiles`, { replace: true });
+    } else {
+      navigate(-1);
+    }
   }
 
   return (

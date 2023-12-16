@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 
 const styles = {
   formContainer: {
-    display: "flex",
+    display: "inline-flex",
     flexDirection: "column",
     gap: "1rem",
-    alignItems: "flex-start",
   },
   section: {
     display: "flex",
@@ -26,15 +25,10 @@ const styles = {
     alignItems: "center",
     gap: "0.5rem",
   },
-  floatLeft: {
-    float: "left",
-    marginRight: "1rem",
-    marginBottom: "1rem",
-  },
   imageBox: {
     width: "350px",
     height: "470px",
-    border: "3px dashed #ccc",
+    border: "3px solid #ccc",
     borderRadius: "0.5rem",
     overflow: "hidden",
     display: "flex",
@@ -132,184 +126,180 @@ function AnimalForm({ animal, onSubmit }) {
 
   return (
     <form style={styles.formContainer} onSubmit={handleSubmit}>
-      <span
-        style={{ display: "inline-flex", flexDirection: "column", gap: "1rem" }}
-      >
-        <section style={styles.section}>
-          <label style={styles.label}>
-            <span>&nbsp;</span>
-            <div style={styles.imageBox}>
-              {formData.image ? (
-                <img
-                  src={formData.image}
-                  alt="animal profile"
-                  width={350}
-                  style={{ ...styles.floatLeft, ...styles.image }}
-                />
-              ) : (
-                <p>Click the button below to select an image</p>
-              )}
-            </div>
-            <button type="button" onClick={updateImage}>
-              Select Image (Random)
-            </button>
-          </label>
-          <div>
-            <div>
-              <h2>Animal Profile</h2>
-              <section style={styles.section}>
-                <div style={styles.forms}>
-                  <label style={styles.label}>
-                    <span>Name</span>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleValueChanges}
-                      placeholder="Name"
-                      required
-                    />
-                  </label>
-                  <label style={styles.label}>
-                    <span>Species</span>
-                    <input
-                      type="text"
-                      name="species"
-                      value={formData.species}
-                      onChange={handleValueChanges}
-                      placeholder="Species"
-                      required
-                    />
-                  </label>
-                </div>
-                <div style={styles.forms}>
-                  <label style={styles.label}>
-                    <span>Breed</span>
-                    <input
-                      type="text"
-                      name="breed"
-                      value={formData.breed}
-                      onChange={handleValueChanges}
-                      placeholder="Breed"
-                      required
-                    />
-                  </label>
-                  <label style={styles.label}>
-                    <span>Age</span>
-                    <input
-                      type="number"
-                      name="age"
-                      value={`${formData.age}`}
-                      onChange={handleValueChanges}
-                      placeholder="Age"
-                      required
-                    />
-                  </label>
-                </div>
-              </section>
-            </div>
-            <div>
-              <h2>Animal Health</h2>
-              <section style={styles.section}>
-                <div style={styles.forms}>
-                  <label style={styles.label}>
-                    <span>Health Status</span>
-                    <input
-                      type="text"
-                      name="healthStatus"
-                      value={formData.healthStatus}
-                      onChange={handleValueChanges}
-                      placeholder="Health Status"
-                      required
-                    />
-                  </label>
-                  <label style={styles.label}>
-                    <span>Adoption Status</span>
-                    <input
-                      type="text"
-                      name="adoptionStatus"
-                      value={formData.adoptionStatus}
-                      onChange={handleValueChanges}
-                      placeholder="Adoption Status"
-                      required
-                    />
-                  </label>
-                </div>
-                <div style={styles.forms}>
-                  <label style={styles.inlineLabel}>
-                    <span>Neutered</span>
-                    <input
-                      type="checkbox"
-                      name="isNeutered"
-                      checked={formData.isNeutered}
-                      onChange={handleValueChanges}
-                    />
-                  </label>
-                  <label style={styles.inlineLabel}>
-                    <span>Vaccinated</span>
-                    <input
-                      type="checkbox"
-                      name="isVaccinated"
-                      checked={formData.isVaccinated}
-                      onChange={handleValueChanges}
-                    />
-                  </label>
-                </div>
-              </section>
-            </div>
-            <div>
-              <h2>Animal Details</h2>
-              <section style={styles.section}>
-                <div style={styles.forms}>
-                  <label style={styles.label}>
-                    <span>Arrival Date</span>
-                    <input
-                      type="datetime-local"
-                      name="arrivalDate"
-                      value={formData.arrivalDate}
-                      onChange={handleValueChanges}
-                      placeholder="Arrival Date"
-                      required
-                    />
-                  </label>
-                  <label style={styles.label}>
-                    <span>Description</span>
-                    <textarea
-                      name="description"
-                      style={{ width: "20rem" }}
-                      value={formData.description}
-                      onChange={handleValueChanges}
-                      placeholder="Description"
-                      required
-                    />
-                  </label>
-                </div>
-              </section>
-            </div>
+      <section style={styles.section}>
+        <label style={styles.label}>
+          <span>&nbsp;</span>
+          <div style={styles.imageBox}>
+            {formData.image ? (
+              <img
+                src={formData.image}
+                alt="animal profile"
+                width={350}
+                style={styles.image}
+              />
+            ) : (
+              <p>Click the button below to select an image</p>
+            )}
           </div>
-        </section>
-        <div style={styles.buttonGroup}>
-          {animal ? (
-            <button
-              type="button"
-              style={{
-                ...styles.button,
-                border: "1px solid red",
-                borderRadius: "0.1rem",
-                color: "red",
-              }}
-              onClick={deleteAnimal}
-            >
-              Delete
-            </button>
-          ) : (
-            <div />
-          )}
-          <button type="submit" style={styles.button}>
-            {animal ? "Edit" : "Register"} Animal
+          <button type="button" onClick={updateImage}>
+            Select Image (Random)
           </button>
+        </label>
+        <div>
+          <div>
+            <h2>Animal Profile</h2>
+            <section style={styles.section}>
+              <div style={styles.forms}>
+                <label style={styles.label}>
+                  <span>Name</span>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleValueChanges}
+                    placeholder="Name"
+                    required
+                  />
+                </label>
+                <label style={styles.label}>
+                  <span>Species</span>
+                  <input
+                    type="text"
+                    name="species"
+                    value={formData.species}
+                    onChange={handleValueChanges}
+                    placeholder="Species"
+                    required
+                  />
+                </label>
+              </div>
+              <div style={styles.forms}>
+                <label style={styles.label}>
+                  <span>Breed</span>
+                  <input
+                    type="text"
+                    name="breed"
+                    value={formData.breed}
+                    onChange={handleValueChanges}
+                    placeholder="Breed"
+                    required
+                  />
+                </label>
+                <label style={styles.label}>
+                  <span>Age</span>
+                  <input
+                    type="number"
+                    name="age"
+                    value={`${formData.age}`}
+                    onChange={handleValueChanges}
+                    placeholder="Age"
+                    required
+                  />
+                </label>
+              </div>
+            </section>
+          </div>
+          <div>
+            <h2>Animal Health</h2>
+            <section style={styles.section}>
+              <div style={styles.forms}>
+                <label style={styles.label}>
+                  <span>Health Status</span>
+                  <input
+                    type="text"
+                    name="healthStatus"
+                    value={formData.healthStatus}
+                    onChange={handleValueChanges}
+                    placeholder="Health Status"
+                    required
+                  />
+                </label>
+                <label style={styles.label}>
+                  <span>Adoption Status</span>
+                  <input
+                    type="text"
+                    name="adoptionStatus"
+                    value={formData.adoptionStatus}
+                    onChange={handleValueChanges}
+                    placeholder="Adoption Status"
+                    required
+                  />
+                </label>
+              </div>
+              <div style={styles.forms}>
+                <label style={styles.inlineLabel}>
+                  <span>Neutered</span>
+                  <input
+                    type="checkbox"
+                    name="isNeutered"
+                    checked={formData.isNeutered}
+                    onChange={handleValueChanges}
+                  />
+                </label>
+                <label style={styles.inlineLabel}>
+                  <span>Vaccinated</span>
+                  <input
+                    type="checkbox"
+                    name="isVaccinated"
+                    checked={formData.isVaccinated}
+                    onChange={handleValueChanges}
+                  />
+                </label>
+              </div>
+            </section>
+          </div>
+          <div>
+            <h2>Animal Details</h2>
+            <section style={styles.section}>
+              <div style={styles.forms}>
+                <label style={styles.label}>
+                  <span>Arrival Date</span>
+                  <input
+                    type="datetime-local"
+                    name="arrivalDate"
+                    value={formData.arrivalDate}
+                    onChange={handleValueChanges}
+                    placeholder="Arrival Date"
+                    required
+                  />
+                </label>
+                <label style={styles.label}>
+                  <span>Description</span>
+                  <textarea
+                    name="description"
+                    style={{ width: "20rem" }}
+                    value={formData.description}
+                    onChange={handleValueChanges}
+                    placeholder="Description"
+                    required
+                  />
+                </label>
+              </div>
+            </section>
+          </div>
         </div>
-      </span>
+      </section>
+      <div style={styles.buttonGroup}>
+        {animal ? (
+          <button
+            type="button"
+            style={{
+              ...styles.button,
+              border: "1px solid red",
+              borderRadius: "0.1rem",
+              color: "red",
+            }}
+            onClick={deleteAnimal}
+          >
+            Delete
+          </button>
+        ) : (
+          <div />
+        )}
+        <button type="submit" style={styles.button}>
+          {animal ? "Edit" : "Register"} Animal
+        </button>
+      </div>
     </form>
   );
 }

@@ -3,6 +3,56 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTaskById } from "../store/actions/shelterActions";
 
+const styles = {
+  section: {
+    display: "flex",
+    gap: "1rem",
+  },
+  taskBox: {
+    border: "1px solid #ccc",
+    padding: "1rem",
+    borderRadius: "5px",
+    marginBottom: "1rem",
+    display: "grid",
+    gap: "0.5rem",
+    gridTemplateColumns: "fit-content(100%) 1fr",
+  },
+  label: {
+    whiteSpace: "nowrap",
+  },
+  imageBox: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem",
+  },
+  links: {
+    display: "flex",
+    gap: "0.5rem",
+  },
+  link: {
+    textDecoration: "underline",
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.8rem",
+  },
+  status: {
+    icon: {
+      display: "inline-block",
+      width: "1.5rem",
+      height: "1.5rem",
+      borderRadius: "50%",
+    },
+    complete: {
+      color: "green",
+    },
+    incomplete: {
+      color: "red",
+    },
+  },
+};
+
 function ShelterTaskDetails() {
   const { taskId } = useParams();
   const dispatch = useDispatch();
@@ -17,82 +67,89 @@ function ShelterTaskDetails() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if (!task) return <div>Task not found</div>;
 
   return (
     <div>
-      <h1>Task Details</h1>
-      {task && (
-        <>
-          <div>
-            <h2>{animal.name}</h2>
-            <img
-              src={animal.image}
-              alt={animal.name}
-              width={350}
-              style={{
-                float: "left",
-                marginRight: "1rem",
-                marginBottom: "1rem",
-              }}
-            />
-            <button type="button">
-              <Link to={`/animal-profiles/${task.animal.id}/edit`}>
-                Edit Profile
-              </Link>
-            </button>
-            <p>
+      <header>
+        <h1>Task Details</h1>
+        <h2>{animal.name}</h2>
+      </header>
+      <div style={styles.taskBox}>
+        <b style={styles.label}>Assigned To</b>
+        <span>{task.assignedTo}</span>
+        <b style={styles.label}>Description</b>
+        <span>{task.description}</span>
+        <b style={styles.label}>Due Date</b>
+        <span>
+          {new Date(task.dueDate).toLocaleString("en-US", {
+            dateStyle: "long",
+            timeStyle: "short",
+          })}
+        </span>
+        <b style={styles.label}>Status</b>
+        <span>{task.status}</span>
+        <b style={styles.label}>Priority</b>
+        <span>{task.priority}</span>
+        <div />
+        <Link
+          style={{ ...styles.link, marginLeft: "auto" }}
+          to={`/shelter-tasks/${task.id}/edit`}
+        >
+          Edit Task
+        </Link>
+      </div>
+      <section style={styles.section}>
+        <div style={styles.imageBox}>
+          <div style={styles.links}>
+            <Link
+              style={styles.link}
+              to={`/animal-profiles/${task.animal.id}/edit`}
+            >
+              Edit Profile
+            </Link>
+          </div>
+          <img src={animal.image} alt={animal.name} width={350} />
+        </div>
+        <div>
+          <div style={styles.content}>
+            <span>
+              <strong>Name: </strong> {animal.name}
+            </span>
+            <span>
               <strong>Species:</strong> {animal.species}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Breed:</strong> {animal.breed}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Age:</strong> {animal.age}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Health Status:</strong> {animal.healthStatus}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Adoption Status:</strong> {animal.adoptionStatus}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Neutered:</strong> {animal.isNeutered ? "Yes" : "No"}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Vaccinated:</strong> {animal.isVaccinated ? "Yes" : "No"}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Arrival Date:</strong>{" "}
               {new Date(animal.arrivalDate).toLocaleString("en-US", {
                 dateStyle: "long",
                 timeStyle: "short",
               })}
-            </p>
-            <p>
+            </span>
+            <span>
               <strong>Description:</strong> {animal.description}
-            </p>
+            </span>
           </div>
-          <hr />
-          <div>
-            <h2>{task.name}</h2>
-            <p>
-              <strong>Assigned To:</strong> {task.assignedTo}
-            </p>
-            <p>
-              <strong>Description:</strong> {task.description}
-            </p>
-            <p>
-              <strong>Due Date:</strong> {task.dueDate}
-            </p>
-            <p>
-              <strong>Status:</strong> {task.status}
-            </p>
-            <p>
-              <strong>Priority:</strong> {task.priority}
-            </p>
-          </div>
-        </>
-      )}
+        </div>
+      </section>
     </div>
   );
 }
