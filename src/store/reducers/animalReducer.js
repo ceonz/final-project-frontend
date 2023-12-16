@@ -43,6 +43,9 @@ const animalReducer = (state = initialState, action) => {
     case 'UPDATE_ANIMAL_FAILURE':
       return { ...state, loading: false, error: action.payload };
 
+    case 'CLEAR_CURRENT_ANIMAL':
+      return { ...state, currentAnimal: null };
+
     default:
       return state;
   }

@@ -8,6 +8,7 @@ function Navbar() {
       <Link to="/home">Home</Link>
       <Link to="/animal-profiles">Animal Profiles</Link>
       <Link to="/shelter-tasks">Shelter Tasks</Link>
+      <Link to="/register-animal">Register Animal</Link>
     </nav>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTaskById } from "../store/actions/shelterActions";
 
@@ -35,6 +35,11 @@ function ShelterTaskDetails() {
                 marginBottom: "1rem",
               }}
             />
+            <button type="button">
+              <Link to={`/animal-profiles/${task.animal.id}/edit`}>
+                Edit Profile
+              </Link>
+            </button>
             <p>
               <strong>Species:</strong> {animal.species}
             </p>
