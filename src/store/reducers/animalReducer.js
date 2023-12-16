@@ -27,7 +27,12 @@ const animalReducer = (state = initialState, action) => {
     case 'ADD_ANIMAL_REQUEST':
       return { ...state, loading: true, error: null };
     case 'ADD_ANIMAL_SUCCESS':
-      return { ...state, loading: false, data: [...state.data, action.payload] };
+      return {
+        ...state,
+        loading: false,
+        data: [...state.data, action.payload],
+        currentAnimal: action.payload
+      };
     case 'ADD_ANIMAL_FAILURE':
       return { ...state, loading: false, error: action.payload };
 
@@ -41,6 +46,18 @@ const animalReducer = (state = initialState, action) => {
         data: state.data.map(animal => animal.id === action.payload.id ? action.payload : animal),
       };
     case 'UPDATE_ANIMAL_FAILURE':
+      return { ...state, loading: false, error: action.payload };
+
+    // Delete animal
+    case 'DELETE_ANIMAL_REQUEST':
+      return { ...state, loading: true, error: null };
+    case 'DELETE_ANIMAL_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        data: state.data.filter(animal => animal.id !== action.payload),
+      };
+    case 'DELETE_ANIMAL_FAILURE':
       return { ...state, loading: false, error: action.payload };
 
     case 'CLEAR_CURRENT_ANIMAL':

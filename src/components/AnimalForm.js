@@ -45,6 +45,17 @@ const styles = {
     margin: "0",
     padding: "0",
   },
+  buttonGroup: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "1rem",
+  },
+  button: {
+    width: "10rem",
+    fontSize: "1rem",
+    fontWeight: "bold",
+    padding: "0.5rem",
+  },
 };
 
 function buildFormData(animal) {
@@ -83,7 +94,7 @@ function AnimalForm({ animal, onSubmit }) {
     if (name === "isNeutered" || name === "isVaccinated") {
       value = e.target.checked;
     } else if (name === "age") {
-      value = Number(value);
+      value = Math.floor(value);
     }
     setFormData({ ...formData, [name]: value });
   }
@@ -100,6 +111,12 @@ function AnimalForm({ animal, onSubmit }) {
       setFormData({ ...formData, image: src });
     } catch (error) {
       alert(`Failed to fetch image (${error.message})`);
+    }
+  }
+
+  function deleteAnimal() {
+    if (window.confirm("Are you sure you want to delete this animal?")) {
+      onSubmit?.(null);
     }
   }
 
@@ -271,18 +288,27 @@ function AnimalForm({ animal, onSubmit }) {
             </div>
           </div>
         </section>
-        <button
-          type="submit"
-          style={{
-            marginLeft: "auto",
-            width: "10rem",
-            fontSize: "1rem",
-            fontWeight: "bold",
-            padding: "0.5rem",
-          }}
-        >
-          {animal ? "Edit" : "Register"} Animal
-        </button>
+        <div style={styles.buttonGroup}>
+          {animal ? (
+            <button
+              type="button"
+              style={{
+                ...styles.button,
+                border: "1px solid red",
+                borderRadius: "0.1rem",
+                color: "red",
+              }}
+              onClick={deleteAnimal}
+            >
+              Delete
+            </button>
+          ) : (
+            <div />
+          )}
+          <button type="submit" style={styles.button}>
+            {animal ? "Edit" : "Register"} Animal
+          </button>
+        </div>
       </span>
     </form>
   );

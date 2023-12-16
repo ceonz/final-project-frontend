@@ -25,7 +25,9 @@ function AnimalProfiles() {
 
   const filteredAnimals = useMemo(
     () =>
-      animals.filter((animal) =>
+      animals
+      .toSorted((a, b) => b.createdAt.localeCompare(a.createdAt))
+      .filter((animal) =>
         animal.name.match(new RegExp(searchText, "gi"))
       ),
     [animals, searchText]

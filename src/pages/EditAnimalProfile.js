@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   addAnimal,
+  deleteAnimal,
   fetchAnimalById,
   updateAnimal,
 } from "../store/actions/animalActions";
@@ -28,15 +29,21 @@ export default function EditAnimalProfile() {
   if (error) return <div>Error: {error}</div>;
 
   async function handleSubmit(formData) {
-    if (animal) {
+    if (animal && formData) {
       dispatch(updateAnimal(animal.id, formData));
+    } else if (animal && !formData) {
+      dispatch(deleteAnimal(animal.id));
     } else {
       dispatch(addAnimal(formData));
     }
+
     do {
       await new Promise((resolve) => setTimeout(resolve, 300));
     } while (loading);
-    navigate(-1);
+
+    navigate("/animal-profiles", {
+      replace: true,
+    });
   }
 
   return (
