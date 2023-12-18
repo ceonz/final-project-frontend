@@ -40,8 +40,8 @@ function Home() {
       <header>
         <h1>Animal Shelter Management System</h1>
       </header>
-      <h2>Recently Arrived Animals</h2>
-      <div className="horizontal-scrollable-container">
+      <h2 className="sectionTitle">Recently Arrived Animals</h2>
+      <div className="cardContainer">
         {sortedAnimals.map((animal) => (
           <Link
             key={`recent-${animal.id}`}
@@ -54,8 +54,8 @@ function Home() {
           </Link>
         ))}
       </div>
-      <h2>Animals Need Care</h2>
-      <div className="horizontal-scrollable-container">
+      <h2 className="sectionTitle">Animals Need Care</h2>
+      <div className="cardContainer">
         {filteredAnimals.map((animal) => (
           <Link key={`care-${animal.id}`} to={`/animal-profiles/${animal.id}`}>
             <AnimalProfileCard
