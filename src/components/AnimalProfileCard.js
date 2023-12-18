@@ -13,7 +13,7 @@ export default function AnimalProfileCard({ animal, requires = [], display }) {
           src={animal.image}
           alt={`A ${animal.species} named ${animal.name}`}
         />
-        <p className={styles.description}>{animal.description}</p> {/* Description added here */}
+        <p className={styles.description}>{animal.description}</p> 
         <p className={styles.cardDetail}>
           {display?.arrivalDate &&
             `Arrived: ${new Date(animal.arrivalDate).toLocaleDateString()}`}
