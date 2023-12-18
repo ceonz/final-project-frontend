@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import styles from "./Search.module.css";
 
-export default function SearchForm({ onSearch, onTextInput }) {
+export default function Search({ onSearch, onTextInput }) {
   const [inputText, setInputText] = useState("");
 
   function handleSubmit(e) {
@@ -14,15 +15,15 @@ export default function SearchForm({ onSearch, onTextInput }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="search">Search: </label>
+    <form onSubmit={handleSubmit} className={styles.search}>
+      <label htmlFor="search" className={styles.searchLabel}>Search: </label>
       <input
         id="search"
         type="text"
         value={inputText}
         onChange={handleInputTextChange}
+        className={styles.searchInput}
       />
-      <button type="submit" style={{ display: "none" }}></button>
     </form>
   );
 }
