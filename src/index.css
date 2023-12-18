@@ -37,12 +37,15 @@ button {
 }
 
 .masonry-container {
-  column-count: 3;
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  margin: 0 auto; 
+  max-width: 100%; 
+  padding: 1rem; 
 }
 
 .masonry-item {
-  display: inline-block;
-  width: 100%;
   break-inside: avoid;
 }
 

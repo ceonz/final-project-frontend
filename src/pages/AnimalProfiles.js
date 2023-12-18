@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchAnimals } from "../store/actions/animalActions";
-import SearchForm from "./SearchForm";
+import Search from "../components/Search";
 import AnimalProfileCard from "../components/AnimalProfileCard";
 
 function AnimalProfiles() {
@@ -41,13 +41,8 @@ function AnimalProfiles() {
       <header>
         <h1>Animal Profiles</h1>
       </header>
-      <SearchForm onTextInput={setSearchText} />
-      <div
-        className="masonry-container"
-        style={{
-          width: "1000px",
-        }}
-      >
+      <Search onTextInput={setSearchText} />
+      <div className="masonry-container">
         {filteredAnimals.map((animal) => (
           <Link
             key={`animal-${animal.id}`}
