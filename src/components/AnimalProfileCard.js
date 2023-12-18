@@ -3,31 +3,22 @@ import styles from "./AnimalProfileCard.module.css";
 export default function AnimalProfileCard({ animal, requires, display }) {
   return (
     <div className={styles.card}>
-      <figure>
+      <div className={styles.cardHeader}>
+        <h3 className={styles.cardTitle}>{animal.name}</h3>
+        <span className={styles.badge}>{animal.species}</span>
+      </div>
+      <div className={styles.cardContent}>
         <img
+          className={styles.avatar}
           src={animal.image}
           alt={`A ${animal.species} named ${animal.name}`}
         />
-        <figcaption>
-          <h3>{animal.name}</h3>
-          <p>{animal.description}</p>
-          {display?.arrivalDate && (
-            <p>
-              <strong>Arrival Date:</strong>{" "}
-              {new Date(animal.arrivalDate).toLocaleString("en-US", {
-                dateStyle: "short",
-                timeStyle: "short",
-              })}
-            </p>
-          )}
-          {requires && (
-            <>
-              <h4>{requires.length === 1 ? "Requires" : "Require"}:</h4>
-              <p>{requires.join(", ")}</p>
-            </>
-          )}
-        </figcaption>
-      </figure>
+        <p className={styles.cardDetail}>
+          {display?.arrivalDate
+            ? `Arrived: ${new Date(animal.arrivalDate).toLocaleDateString()}`
+            : requires.map((req) => `Needs: ${req}`).join(', ')}
+        </p>
+      </div>
     </div>
   );
 }

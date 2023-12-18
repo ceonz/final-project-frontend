@@ -33,3 +33,16 @@ button {
   width: 100%;
   break-inside: avoid;
 }
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 1rem;
+}
