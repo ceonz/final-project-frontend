@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px; 
+  padding: 0 16px; 
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navLinksContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-grow: 1;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+  margin-right: auto;
+}
+
+.pawIcon {
+  width: 24px; 
+  height: 24px;
+}
+
+.srOnly {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.navLink {
+  color: #575757;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  transition: color 0.3s;
+}
+
+.navLink:hover {
+  color: #000000;
+}
+

@@ -13,27 +13,29 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/animal-profiles" element={<AnimalProfiles />} />
-        <Route path="/animal-profiles/:animalId" element={<AnimalDetails />} />
-        <Route
-          path="/animal-profiles/:animalId/edit"
-          element={<EditAnimalProfile />}
-        />
-        <Route
-          path="/animal-profiles/:animalId/add-shelter-task"
-          element={<EditShelterTask />}
-        />
-        <Route path="/shelter-tasks" element={<ShelterTasks />} />
-        <Route path="/shelter-tasks/:taskId" element={<ShelterTaskDetails />} />
-        <Route
-          path="/shelter-tasks/:taskId/edit"
-          element={<EditShelterTask />}
-        />
-        <Route path="/register-animal" element={<EditAnimalProfile />} />
-      </Routes>
+        <div className="main-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/animal-profiles" element={<AnimalProfiles />} />
+            <Route path="/animal-profiles/:animalId" element={<AnimalDetails />} />
+            <Route
+              path="/animal-profiles/:animalId/edit"
+              element={<EditAnimalProfile />}
+            />
+            <Route
+              path="/animal-profiles/:animalId/add-shelter-task"
+              element={<EditShelterTask />}
+            />
+            <Route path="/shelter-tasks" element={<ShelterTasks />} />
+            <Route path="/shelter-tasks/:taskId" element={<ShelterTaskDetails />} />
+            <Route
+              path="/shelter-tasks/:taskId/edit"
+              element={<EditShelterTask />}
+            />
+            <Route path="/register-animal" element={<EditAnimalProfile />} />
+          </Routes>
+        </div>
     </Router>
   );
 }
