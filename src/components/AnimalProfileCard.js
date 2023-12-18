@@ -1,6 +1,6 @@
 import styles from "./AnimalProfileCard.module.css";
 
-export default function AnimalProfileCard({ animal, requires, display }) {
+export default function AnimalProfileCard({ animal, requires = [], display }) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -13,11 +13,17 @@ export default function AnimalProfileCard({ animal, requires, display }) {
           src={animal.image}
           alt={`A ${animal.species} named ${animal.name}`}
         />
+        <p className={styles.description}>{animal.description}</p> 
         <p className={styles.cardDetail}>
-          {display?.arrivalDate
-            ? `Arrived: ${new Date(animal.arrivalDate).toLocaleDateString()}`
-            : requires.map((req) => `Needs: ${req}`).join(', ')}
+          {display?.arrivalDate &&
+            `Arrived: ${new Date(animal.arrivalDate).toLocaleDateString()}`}
         </p>
+        {requires.length > 0 && (
+          <div className={styles.requirements}>
+            <h4>{requires.length === 1 ? "Requires" : "Require"}:</h4>
+            <p>{requires.join(", ")}</p>
+          </div>
+        )}
       </div>
     </div>
   );
