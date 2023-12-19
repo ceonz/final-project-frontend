@@ -41,12 +41,9 @@ export default function EditAnimalProfile() {
     do {
       await new Promise((resolve) => setTimeout(resolve, 300));
     } while (loading);
+  
+    navigate('/animal-profiles');
 
-    if (animal && !formData) {
-      navigate(`/animal-profiles`, { replace: true });
-    } else {
-      navigate(-1);
-    }
   }
 
   return (
