@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchTasks } from "../store/actions/shelterActions";
 import TaskDescriptionCard from "../components/TaskDescriptionCard";
+import Search from "../components/Search";
 
 function ShelterTasks() {
   const dispatch = useDispatch();
@@ -12,7 +13,9 @@ function ShelterTasks() {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  const sortedTasks = useMemo(
+  const [searchText, setSearchText] = useState("");
+
+  const filteredTasks = useMemo(
     () =>
       tasks
         .toSorted((a, b) => b.dueDate.localeCompare(a.dueDate))
@@ -21,8 +24,17 @@ function ShelterTasks() {
           if (a.priority === "High") return -1;
           if (a.priority === "Medium" && b.priority === "Low") return -1;
           return 1;
+        })
+        .filter((task) => {
+          const descriptionMatch = task.description.match(
+            new RegExp(searchText, "gi")
+          );
+          const assignedToMatch =
+            task.assignedTo.toLowerCase().includes(searchText.toLowerCase());
+
+          return descriptionMatch || assignedToMatch;
         }),
-    [tasks]
+    [tasks, searchText]
   );
 
   if (loading) return <div>Loading...</div>;
@@ -33,8 +45,9 @@ function ShelterTasks() {
       <header>
         <h1>Shelter Tasks</h1>
       </header>
-      <div className="vertical-scrollable-container">
-        {sortedTasks.map((task) => (
+      <Search onTextInput={setSearchText} />
+      <div className="assigned-search">
+        {filteredTasks.map((task) => (
           <Link key={`task-${task.id}`} to={`/shelter-tasks/${task.id}`}>
             <TaskDescriptionCard key={task.id} task={task} />
           </Link>
