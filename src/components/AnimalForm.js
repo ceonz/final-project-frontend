@@ -81,6 +81,7 @@ function buildFormData(animal) {
 
 function AnimalForm({ animal, onSubmit }) {
   const [formData, setFormData] = useState(buildFormData(animal));
+  const [animalType, setAnimalType] = useState('cat');
 
   useEffect(() => {
     setFormData(buildFormData(animal));
@@ -97,18 +98,27 @@ function AnimalForm({ animal, onSubmit }) {
     setFormData({ ...formData, [name]: value });
   }
 
-  async function updateImage() {
-    let src = "";
+  async function fetchCatImage() {
+    const catApiUrl = "https://api.thecatapi.com/v1/images/search";
     try {
-      while (!src.endsWith(".jpg")) {
-        const image = await fetch(
-          "https://api.thecatapi.com/v1/images/search"
-        ).then((res) => res.json());
-        src = image[0].url;
-      }
-      setFormData({ ...formData, image: src });
+      const response = await fetch(catApiUrl);
+      const data = await response.json();
+      const imageUrl = data[0].url;
+      setFormData({ ...formData, image: imageUrl });
     } catch (error) {
-      alert(`Failed to fetch image (${error.message})`);
+      alert(`Failed to fetch cat image: ${error.message}`);
+    }
+  }
+
+  async function fetchDogImage() {
+    const dogApiUrl = "https://dog.ceo/api/breeds/image/random";
+    try {
+      const response = await fetch(dogApiUrl);
+      const data = await response.json();
+      const imageUrl = data.message;
+      setFormData({ ...formData, image: imageUrl });
+    } catch (error) {
+      alert(`Failed to fetch dog image: ${error.message}`);
     }
   }
 
@@ -145,9 +155,14 @@ function AnimalForm({ animal, onSubmit }) {
               <p>Click the button below to select an image</p>
             )}
           </div>
-          <button type="button" onClick={updateImage}>
-            Select Image (Random)
-          </button>
+          <div style={styles.buttonGroup}>
+            <button type="button" onClick={fetchCatImage} style={styles.button}>
+              Select Random Cat Image
+            </button>
+            <button type="button" onClick={fetchDogImage} style={styles.button}>
+              Select Random Dog Image
+            </button>
+          </div>
         </label>
         <div>
           <div>
@@ -167,14 +182,18 @@ function AnimalForm({ animal, onSubmit }) {
                 </label>
                 <label style={styles.label}>
                   <span>Species</span>
-                  <input
+                  <select
                     type="text"
                     name="species"
                     value={formData.species}
                     onChange={handleValueChanges}
                     placeholder="Species"
                     required
-                  />
+                  >
+                    <option value="">Select Species</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Dog">Dog</option>
+                  </select>
                 </label>
               </div>
               <div style={styles.forms}>
