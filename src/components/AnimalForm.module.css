@@ -1,0 +1,41 @@
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+select,
+.textarea-description {
+  width: 100%; 
+  padding: 0.5rem; 
+  margin-bottom: 0.5rem; 
+  border: 1px solid #ccc; 
+  border-radius: 0.25rem;
+  box-sizing: border-box; 
+  height: 40px;
+  background-color: #fff;
+}
+
+select {
+  background-position: right 0.5rem top 50%; 
+  background-size: 12px; 
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  accent-color: blue; 
+}
+
+input,
+select,
+textarea {
+  font-size: 1rem; 
+  color: #333; 
+  width: 100%;
+}
+
+.centeredCheckboxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+}
