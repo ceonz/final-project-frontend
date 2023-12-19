@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./AnimalForm.module.css";
 
 const styles = {
   formContainer: {
@@ -13,7 +14,9 @@ const styles = {
   forms: {
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-evenly",
     gap: "1rem",
+    width: "100%",
   },
   label: {
     display: "flex",
@@ -58,6 +61,7 @@ function buildFormData(animal) {
     species: animal?.species || "",
     breed: animal?.breed || "",
     age: animal?.age || "",
+    gender: animal?.gender || "",
     healthStatus: animal?.healthStatus || "",
     adoptionStatus: animal?.adoptionStatus || "",
     isNeutered: animal?.isNeutered || false,
@@ -205,25 +209,31 @@ function AnimalForm({ animal, onSubmit }) {
               <div style={styles.forms}>
                 <label style={styles.label}>
                   <span>Health Status</span>
-                  <input
-                    type="text"
+                  <select
                     name="healthStatus"
                     value={formData.healthStatus}
                     onChange={handleValueChanges}
-                    placeholder="Health Status"
                     required
-                  />
+                    style={styles.input}
+                  >
+                    <option value="">Health Status</option>
+                    <option value="healthy">Healthy</option>
+                    <option value="sick">Sick</option>
+                  </select>
                 </label>
                 <label style={styles.label}>
                   <span>Adoption Status</span>
-                  <input
-                    type="text"
+                  <select
                     name="adoptionStatus"
                     value={formData.adoptionStatus}
                     onChange={handleValueChanges}
-                    placeholder="Adoption Status"
                     required
-                  />
+                    style={styles.input}
+                  >
+                    <option value="">Adoption Status</option>
+                    <option value="available">Available</option>
+                    <option value="adopted">Adopted</option>
+                  </select>
                 </label>
               </div>
               <div style={styles.forms}>
@@ -253,6 +263,20 @@ function AnimalForm({ animal, onSubmit }) {
             <section style={styles.section}>
               <div style={styles.forms}>
                 <label style={styles.label}>
+                  <span>Gender</span>
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleValueChanges}
+                    required
+                    style={styles.input}
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
+                </label>
+                <label style={styles.label}>
                   <span>Arrival Date</span>
                   <input
                     type="datetime-local"
@@ -267,7 +291,7 @@ function AnimalForm({ animal, onSubmit }) {
                   <span>Description</span>
                   <textarea
                     name="description"
-                    style={{ width: "20rem" }}
+                    className="textarea-description"
                     value={formData.description}
                     onChange={handleValueChanges}
                     placeholder="Description"

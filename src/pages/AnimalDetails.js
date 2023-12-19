@@ -72,6 +72,9 @@ function AnimalDetails() {
             <strong>Breed:</strong> {animal.breed}
           </span>
           <span>
+            <strong>Gender:</strong> {animal.gender}
+          </span>
+          <span>
             <strong>Age:</strong> {animal.age}
           </span>
           <span>
